@@ -9,23 +9,23 @@ makeCacheMatrix <- function(x = matrix()) {
       i <<- NULL
     }
     get <- function() x
-    setinversed <- function(inversed) i <<- inversed
-    getinversed <- function() i
+    setinverted <- function(inverted) i <<- inverted
+    getinverted <- function() i
     list(set = set, get = get,
-         setinversed = setinversed,
-         getinversed = getinversed)
+         setinverted = setinverted,
+         getinverted = getinverted)
 }
 
 ## Inverts matrix if it was not yet inverted
 
 cacheSolve <- function(x, ...) {
-  i <- x$getinversed()
+  i <- x$getinverted()
   if(!is.null(i)) {
     message("getting cached data")
     return(i)
   }
   data <- x$get()
   i <- solve(data, ...)
-  x$setinversed(i)
+  x$setinverted(i)
   i
 }
